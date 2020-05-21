@@ -15,11 +15,11 @@ public class Bishop extends Piece {
     }
 
     public int getX() {
-        return 0;
+        return this.xpos;
     }
 
     public int getY() {
-        return 0;
+        return this.ypos;
     }
 
     public void setPos(int x, int y) {
