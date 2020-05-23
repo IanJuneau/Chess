@@ -14,15 +14,10 @@ public abstract class Piece {
      */
 
 
-    public Piece(int x, int y, Player player){
+    public Piece(int x, int y){
         this.x = x;
         this.y = y;
-        this.player =  player;
-
-        setPos(x,y);
-
     }
-
     public abstract int getX();
 
     public abstract int getY();

@@ -1,9 +1,5 @@
 package Game;
 
 public class Board {
-
-    int[][] board_Size = new int[8][8];
-
-
-
+    public boolean[][] isOccupied = new boolean[8][8];
 }

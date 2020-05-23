@@ -4,70 +4,74 @@ import Pieces.*;
 
 public class Main {
     //Creating all array's to hold the piece objects(Pawn1 are the pawns for player 1 etc.)
-    static Pawn[] pawn1 = new Pawn[8];
-    static Pawn[] pawn2 = new Pawn[8];
-    static Bishop[] bishop1 = new Bishop[2];
-    static Bishop[] bishop2 = new Bishop[2];
-    static Knight[] knight1 = new Knight[2];
-    static Knight[] knight2 = new Knight[2];
-    static King[] king1 = new King[1];
-    static King[] king2 = new King[1];
-    static Queen[] queen1 = new Queen[1];
-    static Queen[] queen2 = new Queen[1];
-    static Rook[] rook1 = new Rook[2];
-    static Rook[] rook2 = new Rook[2];
-////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Creating two player objects to assign pieces to a player
-    static Player player1 = new Player(1, "white");
-    static Player player2 = new Player(2, "black");
-    //Creating all Piece objects and placing them on the board and assigning them to their player.
+    static public Piece player1[] = new Piece[16];
+    static public Piece player2[] = new Piece[16];
+    /*
+        Indecies 0-7 are pawns(from left to right)
+        8-9 are rooks
+        10-11 are knights
+        12-13 are bishops
+        14 is the queen
+        15 is the king
+     */
+    //Creating a board object to access the board
+    static Board board = new Board();
+    //Creating all Piece objects and placing them on the board
     static void boardSetup(){
-///////////////////////Pawns/////////////////////////
-        for(int i = 0; i<=7; i++){
-            pawn1[i] = new Pawn(i+1,2,player1);
-        }
-        for(int i = 0; i<=7; i++){
-            pawn2[i] = new Pawn(i+1,7,player2);
-        }
-///////////////////////Bishops/////////////////////////
-        for(int i = 0; i<2; i++){
-            int p = i == 0 ? 3 : 6;
-            bishop1[i] = new Bishop(p,1,player1);
-        }
-        for(int i = 0; i<2; i++){
-            int p = (i == 0 ? 3 : 6);
-            bishop2[i] = new Bishop(p,8,player2);
-        }
-///////////////////////Knights/////////////////////////
-        for(int i = 0; i <2; i ++){
-            int p = (i == 0 ? 2 : 7);
-            knight1[i] = new Knight(p,1, player1);
-        }
-        for(int i = 0; i <2; i ++){
-            int p = (i == 0 ? 2 : 7);
-            knight2[i] = new Knight(p,8,player2);
-        }
-///////////////////////Kings/////////////////////////
-        king1[0] = new King(5,1,player1);
-        king2[0] = new King(5,8,player2);
-///////////////////////Queens/////////////////////////
-        queen1[0] = new Queen(4,1,player1);
-        queen2[0] = new Queen(4,8,player2);
-///////////////////////Rooks/////////////////////////
-        for(int i = 0; i <2; i ++){
-            int p = (i == 0 ? 3 : 6);
-            rook1[i] = new Rook(p,1,player1);
-        }
-        for(int i = 0; i <2; i ++){
-            int p = (i == 0 ? 1 : 8);
-            rook2[i] = new Rook(p,8,player2);
+        for (int i = 0; i<player1.length; i++){
+            //Pawns
+            if(i<=7){
+                player1[i] = new Pawn(i,1);
+                player2[i] = new Pawn(i,6);
+                board.isOccupied[i][1] = true;
+                board.isOccupied[i][6] = true;
+            }
+            //Rooks
+            if(i>7 && i < 10){
+                int p = ((i == 8 ? 0 : 7));
+                player1[i] = new Rook(p,0);
+                player2[i] = new Rook(p,7);
+                board.isOccupied[p][0] = true;
+                board.isOccupied[p][7] = true;
+            }
+            //Knights
+            if(i>9 && i < 12){
+                int p = ((i == 10 ? 1 : 6));
+                player1[i] = new Knight(p,0);
+                player2[i] = new Knight(p,7);
+                board.isOccupied[p][0] = true;
+                board.isOccupied[p][7] = true;
+            }
+            //Bishops
+            if(i>11 && i<14){
+                int p = ((i == 10 ? 1 : 6));
+                player1[i] = new Bishop(p,0);
+                player2[i] = new Bishop(p,7);
+                board.isOccupied[p][0] = true;
+                board.isOccupied[p][7] = true;
+            }
+            //Queens
+            if(i==14){
+                player1[i] = new Queen(3,0);
+                player2[i] = new Queen(3,7);
+                board.isOccupied[3][0] = true;
+                board.isOccupied[3][7] = true;
+            }
+            //Kings
+            if(i==15){
+                player1[i] = new King(4,0);
+                player2[i] = new King(4,7);
+                board.isOccupied[4][0] = true;
+                board.isOccupied[4][7] = true;
+            }
         }
     }
 /////////////////////////////////////////////////////////////////////
-
-
+    
     public static void main(String[] args) {
         boardSetup();
+
+        player1[2].move(player1[2].getX(),player1[2].getY(),2,9);
 
     }
 }

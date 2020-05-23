@@ -1,5 +1,5 @@
--Add movement logic to all piece types
 -Add movement checks
+	-Unobstructed path check
 -Add killing piece mechanic
 -Add in a checkmate check
 -Add in Pawn conversions

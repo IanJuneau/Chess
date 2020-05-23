@@ -9,8 +9,11 @@ public class Bishop extends Piece {
 
     int xpos, ypos;
 
-    public Bishop(int x, int y, Player player){
-        super(x,y,player);
+    public Bishop(int x, int y){
+        super(x,y);
+        this.xpos = x;
+        this.ypos = y;
+        setPos(xpos, ypos);
         type = type.BISHOP;
     }
 
@@ -37,6 +40,11 @@ public class Bishop extends Piece {
     }
 
     public void move(int iniX, int iniY, int finalX, int finalY){
+        if(finalX > 8 || finalX < 0 || finalY > 8 || finalY < 0){
+            System.out.println("You cannot move a piece off of the board");
+            return;
+        }
+
         //Calculates the difference in coordinates
         int deltaX = finalX - iniX, deltaY = finalY-iniY;
 
@@ -46,6 +54,4 @@ public class Bishop extends Piece {
             System.out.println("That is an illegal move for a " + type);
         }
     }
-
-
 }
